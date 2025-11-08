@@ -1,0 +1,25 @@
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+
+{
+ "email": "202957@upf.br",
+ "passwordHash": "senhadoeric"
+}
+
+
+###
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+
+{
+ "name": "ericDrey",
+ "email": "202957@upf.br",
+ "passwordHash": "senhadoeric"
+}
+
+
+###
+GET http://localhost:3000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoidXN1YXJpb0B1cGYuYnIiLCJuYW1lIjoidXN1YXJpbyIsImlhdCI6MTc2MjI2NjIwNywiZXhwIjoxNzYyMzUyNjA3fQ.CKmviC3IKI58JyzCYPQfl91KooIE2FCqGEld-Yj3Sig
