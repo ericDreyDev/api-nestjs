@@ -1,10 +1,11 @@
 import { Injectable, BadRequestException, NotFoundException, ConflictException } from '@nestjs/common';
 import { CreateProfileDto } from 'src/dtos/profiles/create-profile-dto';
+import { UpdateProfileDto } from 'src/dtos/profiles/update-profile-dto';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class ProfileService {
-    constructor(private prisma: PrismaService) { }    
+    constructor(private prisma: PrismaService) { }
 
     async createProfile(dto: CreateProfileDto) {
 
@@ -30,10 +31,28 @@ export class ProfileService {
 
     async getProfileById(id: number) {
         const profile = await this.prisma.profile.findUnique({ where: { id } });
+
         if (!profile) {
             throw new NotFoundException('Profile not found');
         }
-        
+
         return profile;
+    }
+
+    async updateProfile(id: number, dto: UpdateProfileDto) {
+        const profile = await this.prisma.profile.findUnique({ where: { id } });
+
+        if (!profile) {
+            throw new NotFoundException('Profile not found');
+        }
+
+        return await this.prisma.profile.update({
+            where: { id },
+            data: {
+                fullName: dto.fullName,
+                birthDate: dto.birthDate ? new Date(dto.birthDate) : null,
+                avatarUrl: dto.avatarUrl
+            }
+        });
     }
 }
