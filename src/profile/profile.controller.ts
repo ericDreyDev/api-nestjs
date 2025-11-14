@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Put, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateProfileDto } from '../dtos/create-profile-dto';
+import { CreateProfileDto } from '../dtos/profiles/create-profile-dto';
 import { ProfileService } from './profile.service';
 
 @Controller('profile')
@@ -11,6 +11,16 @@ export class ProfileController {
   @Post()
   async createProfile(@Body() body: CreateProfileDto) {
     await this.profileService.createProfile(body);
+  }
+
+  @Get(':id')
+  async getProfile(@Param('id', ParseIntPipe) id: number) {
+    return await this.profileService.getProfileById(id);
+  }
+
+  @Put(':id')
+  async updateProfile(@Param('id', ParseIntPipe) id: number, @Body() body: CreateProfileDto) {
+    return
   }
 
 }

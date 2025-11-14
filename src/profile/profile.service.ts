@@ -1,5 +1,5 @@
 import { Injectable, BadRequestException, NotFoundException, ConflictException } from '@nestjs/common';
-import { CreateProfileDto } from 'src/dtos/create-profile-dto';
+import { CreateProfileDto } from 'src/dtos/profiles/create-profile-dto';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
@@ -26,5 +26,14 @@ export class ProfileService {
                 avatarUrl: dto.avatarUrl
             },
         });
+    }
+
+    async getProfileById(id: number) {
+        const profile = await this.prisma.profile.findUnique({ where: { id } });
+        if (!profile) {
+            throw new NotFoundException('Profile not found');
+        }
+        
+        return profile;
     }
 }

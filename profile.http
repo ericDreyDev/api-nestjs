@@ -7,3 +7,6 @@ Content-Type: application/json
     "birthDate": "1990-01-01",
     "avatarUrl": "https://img.freepik.com/free-vector/smiling-young-man-illustration_1308-174669.jpg?semt=ais_incoming&w=740&q=80"
 }
+###
+
+GET http://localhost:4000/api/profile/1
